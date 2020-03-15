@@ -14,14 +14,12 @@ public class CameraFocus : MonoBehaviour
     [Header("Target | Цель")]
     public Transform targetTransform; //Заполнить в редакторе!
 
-    void Start()
-    {
+    void Start(){
         //Модифицируем z координату
         target.z = transform.position.z;
     }
 
-    void FixedUpdate()
-    {
+    void FixedUpdate(){
         target.x = targetTransform.position.x;
         if(useY) target.y = targetTransform.position.y;
 
