@@ -6,8 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
-public class Player : MonoBehaviour
-{
+public class Player : MonoBehaviour {
     private Rigidbody2D playerBody;
     private Collider2D playerCollider;
     private float scaleX = 1f;
@@ -31,29 +30,22 @@ public class Player : MonoBehaviour
     *  К примеру, нам надо затемнить экран. Мы не можем просто его затемнить. Нам надо
     *  использовать объект gameController для того, чтобы ОТ ЕГО ЛИЦА экран затемнился
     */
-
     //А это отдельные объекты для управления экраном
     ScreenUtils.Fader Fader;
-
     
-
-    //Создаём конкретный экземпляр gameController для безличных действий с игрой
     void Awake(){
         gameController = Instantiate(gameController);
         Fader = gameController.AddComponent<ScreenUtils.Fader>();
     }
 
     void Start(){
-
         playerBody = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
         scaleX = transform.localScale.x;
         scaleY = transform.localScale.y;
 
-        
-        //myFader.FadeIn(overlay, 100, 50f);
+        Fader.FadeInOut(overlay, 100, 50f, 1);   
     }
-
     ///<summary>
     /// Обычный GetAxis, только с двумя настраиваемыми кнопками и чётким разделением
     /// Если Input.GetAxis возвращает нажатые кнопки с промежутком, 
@@ -61,7 +53,7 @@ public class Player : MonoBehaviour
     /// </summary> 
     
     float CustomAxis(KeyCode A, KeyCode D) {
-        if (Input.GetKey(A)) return -1f;
+        if (Input.GetKey(A)) return -1f; 
         if (Input.GetKey(D)) return 1f;
         else return 0f;
     }
