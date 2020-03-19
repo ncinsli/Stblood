@@ -47,7 +47,6 @@ public class ScreenUtils : MonoBehaviour{
                     }
                 }
             }
-            
             StartCoroutine(FadeInOut());
         }
 

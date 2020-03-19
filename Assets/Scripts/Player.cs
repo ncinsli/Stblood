@@ -31,20 +31,21 @@ public class Player : MonoBehaviour {
     *  использовать объект gameController для того, чтобы ОТ ЕГО ЛИЦА экран затемнился
     */
     //А это отдельные объекты для управления экраном
-    ScreenUtils.Fader Fader;
     
     void Awake(){
-        gameController = Instantiate(gameController);
-        Fader = gameController.AddComponent<ScreenUtils.Fader>();
     }
 
     void Start(){
+        ScreenUtils.Fader scrFader = gameController.GetComponent<ScreenUtils.Fader>();
+
+
         playerBody = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
         scaleX = transform.localScale.x;
         scaleY = transform.localScale.y;
 
-        Fader.FadeInOut(overlay, 100, 50f, 1);   
+
+        scrFader.FadeInOut(overlay, 100, 500f, 3);
     }
     ///<summary>
     /// Обычный GetAxis, только с двумя настраиваемыми кнопками и чётким разделением
