@@ -7,11 +7,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class Player : MonoBehaviour {
-    private Rigidbody2D playerBody;
-    private Collider2D playerCollider;
-    private float scaleX = 1f;
-    private float scaleY = 3f;
-
+    
     [Header("Movement information | Информация о движении")]
     public float movement;
     [Range(0.1f ,1)]public float speed = 0.2f;
@@ -30,22 +26,27 @@ public class Player : MonoBehaviour {
     *  К примеру, нам надо затемнить экран. Мы не можем просто его затемнить. Нам надо
     *  использовать объект gameController для того, чтобы ОТ ЕГО ЛИЦА экран затемнился
     */
-    //А это отдельные объекты для управления экраном
     
+    private Rigidbody2D playerBody;
+    private Collider2D playerCollider;
+    private float scaleX = 1f;
+    private float scaleY = 3f;
+
+    //А это отдельные объекты для управления экраном:
+    Fader fader; //Компонент для работы с затемнениями экрана
+
+
     void Awake(){
     }
 
     void Start(){
-        ScreenUtils.Fader scrFader = gameController.GetComponent<ScreenUtils.Fader>();
-
-
         playerBody = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
         scaleX = transform.localScale.x;
         scaleY = transform.localScale.y;
+        fader = gameController.GetComponent<Fader>(); //Привязываем наш компонент к компоненту на gController
 
-
-        scrFader.FadeInOut(overlay, 100, 500f, 3);
+        //fader.FadeInOut(overlay, 100, 50f, 1);
     }
     ///<summary>
     /// Обычный GetAxis, только с двумя настраиваемыми кнопками и чётким разделением
